@@ -4,9 +4,7 @@ import os
 
 app = Flask(__name__)
 
-app.secret_key = "SecretKey"
-
-
+app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route('/', methods=['GET','POST'])
 def weatherApp():
