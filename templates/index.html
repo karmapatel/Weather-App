@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %} 
+
+<form method="POST" action="/">
+    <input type="text" name="cityname" id="cityname" placeholder="Enter the City Name">
+    <input type="submit" value="Get Weather">
+</form>
+
+<div>
+    {% if dataProvided %}
+    <p>
+        Temperature: {{temp}}&deg;C <br>
+        Feels like: {{fl}}&deg;C <br>
+        Visibility: {{visibility}} meters <br>
+        Wind Speed: {{windspeed}} m/s <br>
+        Country: {{country}} <br>
+    </p>
+    {% else %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages%}
+        <p style="color: red;">{{msg}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    {% endif %}
+</div>
+
+{% endblock %}
