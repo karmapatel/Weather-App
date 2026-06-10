@@ -1,15 +1,18 @@
 from flask import Flask, render_template, request, flash, redirect,url_for
 import requests
+import os
 
 app = Flask(__name__)
 
 app.secret_key = "SecretKey"
 
+
+
 @app.route('/', methods=['GET','POST'])
 def weatherApp():
     if request.method == 'POST':
         cityName = request.form.get('cityname')
-        api = "5cb9617383172e4b460d9748de7b5e4d"
+        api = os.getenv("OPENWEATHER_API_KEY")
         url = f"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={api}"
         if not cityName:
             flash('Please Enter the City Name...')
